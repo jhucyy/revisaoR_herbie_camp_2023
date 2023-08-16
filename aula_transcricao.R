@@ -39,3 +39,12 @@
 #cada funÃ§Ã£o tem um argumento. 
 
 
+
+# Data frames -------------------------------------------------------------
+
+# para criar um data frame você pode usar dois vectores que tem o mesmo tamanho de "casos".
+
+#com a função names você pode recuperar os nomes das variáveis dentro do data frame;
+#sabendo o nome podemos indexar os dados do data frame.
+
+

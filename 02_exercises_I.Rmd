@@ -155,6 +155,9 @@ Calculate the animal to human conversion ratios for the animals you've
 picked and assign the results to an object.
 
 ```{r}
+
+human_lifespan <- 122.5
+
 animal_to_human_lifespan <- human_lifespan / animals_lifespan
 
 
@@ -193,7 +196,7 @@ Create the function here:
 golden_hamster_to_human_years <- function(x){
   
   golden_hamster_lifespan <- 3.9
-  human_lifespan <- 122
+  human_lifespan <- 122.5
   
   ratio <- human_lifespan / golden_hamster_lifespan * x
   
@@ -218,7 +221,7 @@ Cat lifespan:
 ```{r}
 cat_lifespan_to_human <- function(x){
   
-  human_lifespan <-  122
+  human_lifespan <-  122.5
   cat_life_span <- 30
   
   ratio <- human_lifespan / cat_life_span * x
