@@ -42,9 +42,21 @@
 
 # Data frames -------------------------------------------------------------
 
-# para criar um data frame você pode usar dois vectores que tem o mesmo tamanho de "casos".
+# para criar um data frame voce pode usar dois vectores que tem o mesmo tamanho de "casos".
 
-#com a função names você pode recuperar os nomes das variáveis dentro do data frame;
+#com a funcao names voce pode recuperar os nomes das variaveis dentro do data frame;
 #sabendo o nome podemos indexar os dados do data frame.
 
+
+
+# Tidyverse ---------------------------------------------------------------
+
+#um super pacote que contem outros pacotes que ajuda na manipulaÃ§Ã£o/limpeza/organizaÃ§ao
+#de bases de dados.
+
+#principios do tidyverse, toda variavel deve ser uma coluna
+#e em cada linha uma observacao.
+#janitor package ajuda na organizacao da base. 
+#a funcao clean_names do pacote janitor limpa os nomes das variaves da base
+#e traduz todas para o padrao snake_case. 
 

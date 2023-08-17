@@ -489,6 +489,14 @@ library(janitor)
 One annoyance with the `penguins_raw` data is that it has spaces in the
 variable names. Urgh!
 
+```{r}
+penguins_clean <- janitor::clean_names(penguins_raw)
+penguins_clean
+
+glimpse(penguins_clean)
+```
+
+
 R has to put quotes around the variable names that have spaces:
 
 ```{r}
@@ -543,6 +551,8 @@ Here to help get rid of these *constant* columns is the function
 
 penguins_clean <- remove_constant(penguins_clean, quiet = F)
 
+penguins_clean <- janitor::remove_constant(penguins_clean, quiet = F)
+
 ```
 
 When we set `quiet = F` we even get some info about what exactly was
@@ -587,7 +597,7 @@ and will name our variables `species` and `latin_name`:
 
 ```{r}
 
-penguins_clean <- separate(penguins_clean, species, sep = " \\(", into = c("species", "latin_name"))
+penguins_clean <- separate(penguins_clean, species, sep = "\\(", into = c("species", "latin_name"))
 
 ```
 
