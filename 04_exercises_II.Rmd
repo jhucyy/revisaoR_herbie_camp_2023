@@ -106,8 +106,9 @@ Load the `tidyverse` and `janitor` packages.
 ```{r}
 rm(list = ls())
 library(tidyverse)
-
+install.packages("janitor")
 library(janitor)
+library(tidyverse)
 ```
 
 ## Task 2
@@ -210,7 +211,8 @@ the species `Adelie`.
 
 ```{r}
 
-
+penguin |> 
+  filter(sex == "male" & species == "Adelie")
 
 ```
 
@@ -222,7 +224,10 @@ Create three new variables that calculates `bill_length_mm` and
 Tip: divide the length value by 10.
 
 ```{r}
-
+penguin |> 
+  mutate(bill_length_centimenter = bill_length_mm/10,
+           bill_depth_centimenter = bill_depth_mm/10, 
+           flipper_length_centimenter = flipper_length_mm/10)
 
 
 ```
@@ -233,6 +238,8 @@ Create a new variable called `bill_depth_cat` which has two values:
 -   Everything below a bill depth of 18mm is "low"
 
 ```{r}
+
+  ifelse(penguin$bill_depth_mm >= 18.0, "high", "low")
 
 
 
@@ -246,7 +253,12 @@ Create a new variable called `species_short`.
 
 ```{r}
 
-
+penguin |> 
+  mutate(species_short = case_when(
+    species == "Adelie" ~ "A",
+    species == "Chinstrap" ~ "C",
+    species == "Gentoo" ~ "G"
+  ))
 
 ```
 
@@ -256,7 +268,9 @@ Calculate the average `body_mass_g` per `island`.
 
 ```{r}
 
-
+grouped_by_island <- group_by(penguin, island)
+ 
+summarise(grouped_by_island, body_mass_avg = mean(body_mass_g, na.rm = T))
 
 ```
 
@@ -286,7 +300,15 @@ it works.
 Once you are done, assign the data to `new_penguins`.
 
 ```{r}
-
+new_penguins <- penguin |> 
+  filter(species %in% c("Chinstrap", "Adelie")) |> 
+  rename(observed_sex = sex) |> 
+  select(species, observed_sex, bill_depth_mm, bill_length_mm) |>
+  mutate(ratio = bill_length_mm/bill_depth_mm) |> 
+  arrange(desc(ratio))
+  
+  
+  
 
 
 ```
@@ -294,7 +316,9 @@ Once you are done, assign the data to `new_penguins`.
 Calculate the average ratio by `species` and `sex`, again using pipes.
 
 ```{r}
-
+penguin |> 
+  group_by(species, sex) |> 
+  summarise(ratio = mean(body_mass_g, na.rm = T))
 
 
 ```
@@ -304,8 +328,12 @@ Calculate the average ratio by `species` and `sex`, again using pipes.
 Count the number of penguins by island and species.
 
 ```{r}
+penguin |> 
+  group_by(island, species) |> 
+  count()
 
-
+penguin |> 
+  count(island, species)
 
 ```
 
@@ -329,13 +357,17 @@ animal_friends <- data.frame(
 Start here:
 
 ```{r}
+animal_tidy <- animal_friends |> 
+  separate(col = Age.Adopted.Condition, sep = "/", into = c("Age", "Year_Adopted", "Temperament"))
 
-
-
+?separate
 ```
 
 ```{r}
 
+animal_tidy <- animal_tidy |> 
+  rename(adopted = a_opterr) |> 
+  remove_constant()
 
 
 ```
@@ -344,6 +376,7 @@ If you are done, turn the final data into long format.
 
 ```{r}
 
-
+animal_tidy |> 
+  pivot_longer(c(age, year_adopted, temperament))
 
 ```
